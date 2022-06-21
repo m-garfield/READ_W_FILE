@@ -1,8 +1,9 @@
-file_name = "Recieps"
+
+file_name = "Reciepts"
 def catalog_reader(file_name):
     cook_book = {}
     dish_ingridient = []
-    with open(file_name) as file:
+    with open(file_name, 'r', encoding='cp1251') as file:
         for dish in file:
             dish = dish.strip()
             list_ingridients = []
@@ -13,24 +14,34 @@ def catalog_reader(file_name):
                 dec_ingridient = {}
                 dec_ingridient = {'ingredient_name': list_ingridient_dish[0], 'quantity': list_ingridient_dish[1], 'measure': list_ingridient_dish[2]}
                 list_ingridients.append(dec_ingridient)
-            fake = file.readline()
+            file.readline()
             cook_book[dish] = list_ingridients
     return cook_book
 cook_book = catalog_reader(file_name)
-dishes = ["Омлет", "Утка по-пекински", "Фахитос"]
+
 def get_shop_list_by_dishes(dishes, person_count):
     list_by_dishes = {}
     for dish in dishes:
         list_ingridients = cook_book[dish]
         for dec_ingridient in list_ingridients:
-            if dec_ingridient['ingredient_name'] in  list_by_dishes :
-                list_by_dishes[dec_ingridient['ingredient_name']] =
+            ingridient = dec_ingridient['ingredient_name']
+            if ingridient in  list_by_dishes:
+                dec_ingridient_by_shop = list_by_dishes[ingridient]
+                new_ammont_ingridient = 0
+                old_ammount_ingridient = 0
+                old_ammount_ingridient = dec_ingridient_by_shop['quantity']
+                new_ammont_ingridient = str((int(old_ammount_ingridient) + int(dec_ingridient['quantity'])) * person_count )
+                list_by_dishes[ingridient]={'quantity':new_ammont_ingridient, 'measure' : dec_ingridient['measure']}
+            else:
+                list_by_dishes[ingridient] = {'quantity':dec_ingridient['quantity'], 'measure' : dec_ingridient['measure']}
+
+    return  list_by_dishes
+
+dishes = ["Омлет", "Омлет"]
 
 
-        input()
-
-
-
+list_by_dishes = get_shop_list_by_dishes(dishes, 2)
+print(list_by_dishes)
 #         for list_ingridient in cook_book[dish]:
 #             # Список словарей ингридиентов
 #             for ingridient in list_ingridient:
@@ -38,7 +49,7 @@ def get_shop_list_by_dishes(dishes, person_count):
 #                 print(ingridient)
 #                 list_by_ingridients = {name_ingridient: }
 #
-get_shop_list_by_dishes(dishes, 2)
+# get_shop_list_by_dishes(dishes, 2)
 
     # {
     #     'Картофель': {'measure': 'кг', 'quantity': 2},
