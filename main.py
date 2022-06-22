@@ -30,32 +30,12 @@ def get_shop_list_by_dishes(dishes, person_count):
                 new_ammont_ingridient = 0
                 old_ammount_ingridient = 0
                 old_ammount_ingridient = dec_ingridient_by_shop['quantity']
-                new_ammont_ingridient = str((int(old_ammount_ingridient) + int(dec_ingridient['quantity'])) * person_count )
+                new_ammont_ingridient = str(int(old_ammount_ingridient) + int(dec_ingridient['quantity'])* person_count)
                 list_by_dishes[ingridient]={'quantity':new_ammont_ingridient, 'measure' : dec_ingridient['measure']}
             else:
                 list_by_dishes[ingridient] = {'quantity':dec_ingridient['quantity'], 'measure' : dec_ingridient['measure']}
-
     return  list_by_dishes
 
-dishes = ["Омлет", "Омлет"]
-
-
+dishes = ["Омлет", "Омлет", "Фахитос"]
 list_by_dishes = get_shop_list_by_dishes(dishes, 2)
 print(list_by_dishes)
-#         for list_ingridient in cook_book[dish]:
-#             # Список словарей ингридиентов
-#             for ingridient in list_ingridient:
-#                 # словарь ингридиента
-#                 print(ingridient)
-#                 list_by_ingridients = {name_ingridient: }
-#
-# get_shop_list_by_dishes(dishes, 2)
-
-    # {
-    #     'Картофель': {'measure': 'кг', 'quantity': 2},
-    #     'Молоко': {'measure': 'мл', 'quantity': 200},
-    #     'Помидор': {'measure': 'шт', 'quantity': 4},
-    #     'Сыр гауда': {'measure': 'г', 'quantity': 200},
-    #     'Яйцо': {'measure': 'шт', 'quantity': 4},
-    #     'Чеснок': {'measure': 'зубч', 'quantity': 6}
-    # }
